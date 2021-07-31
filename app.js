@@ -51,8 +51,26 @@ const app = new Vue({
     newContact: initialContact,
     btnText: 'Agregar Contacto',
   },
+  watch: {
+    isEdit() {
+      if (!this.isEdit) {
+        this.btnText = 'Agregar Contacto';
+      } else {
+        this.btnText = 'Editar Contacto';
+      }
+    },
+  },
+  computed: {
+    isEditInput() {
+      return this.newContact.firstname !== '' ? true : false;
+    },
+  },
   methods: {
-    addContact: function () {
+    cancel() {
+      this.isEdit = false;
+      this.newContact = initialContact;
+    },
+    addContact() {
       if (!this.isEdit) {
         this.contacts.push({
           ...this.newContact,
@@ -67,15 +85,14 @@ const app = new Vue({
           phone: this.newContact.phone,
         };
         this.newContact = initialContact;
-        this.btnText = 'Agregar Contacto';
         this.isEdit = false;
       }
     },
-    editContact: function (index) {
+    editContact(index) {
       this.isEdit = true;
       this.newContact = { ...this.contacts[findcontactKey(index)] };
     },
-    deleteContact: function (contactid) {
+    deleteContact(contactid) {
       this.contacts.splice(findcontactKey(contactid), 1);
     },
   },

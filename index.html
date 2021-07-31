@@ -13,14 +13,14 @@
       crossorigin="anonymous"
     />
 
-    <title>Hello, world!</title>
+    <title>Contact Crud</title>
   </head>
   <body>
     <div class="container mt-5" id="app">
       <h3>{{titulo}}</h3>
       <div class="card">
         <div class="mx-2 row align-items-start">
-        <input type="text" v-model="newContact.isEdit" hidden>
+          <input type="text" v-model="newContact.isEdit" hidden />
           <div class="col">
             <input
               v-model="newContact.firstname"
@@ -59,7 +59,10 @@
         <div class="mx-2 mb-2 row align-items-start">
           <div class="col">
             <button class="btn btn-primary" @click="addContact">
-              {{btnText}}
+              {{ btnText }}
+            </button>
+            <button v-if="isEditInput" class="btn btn-danger" @click="cancel">
+              Cancelar
             </button>
           </div>
         </div>
